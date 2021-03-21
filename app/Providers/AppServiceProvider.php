@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Abstract\IBlogRepository;
+use App\Repositories\Concrete\BlogRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(IBlogRepository::class, BlogRepository::class);
     }
 
     /**
@@ -23,6 +25,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
     }
 }
