@@ -27,7 +27,7 @@ class BlogRepository implements IBlogRepository
         $blog = new Blog();
         $blog->title = $request->title;
         $blog->body = $request->body;
-        
+
         // save record, if can not save then return false
         $res = $blog->save();
         if (!$res) {

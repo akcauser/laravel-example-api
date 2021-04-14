@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Abstract\IBlogRepository;
 use Illuminate\Http\Request;
 
-class BlogController extends Controller
+class ApiBlogController extends Controller
 {
     protected IBlogRepository $blogRepository;
 
@@ -15,23 +15,23 @@ class BlogController extends Controller
         $this->blogRepository = $blogRepository;
     }
 
-    public function list()
+    public function index()
     {
         $blogs = $this->blogRepository->get_all();
 
-        return $this->response(data: $blogs);
+        return response()->json($blogs);
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         // store data
         $response = $this->blogRepository->store($request);
 
         if (!$response)
-            return $this->response(error: true, code: 500, message: 'Blog not created.', data: []);
+            return response()->json('Blog not created', 500);
 
         // response json
-        return $this->response(message: 'Blog created.', data: $response);
+        return response()->json($response);
     }
 
     public function update(Request $request)
@@ -41,39 +41,39 @@ class BlogController extends Controller
 
         // cevap null ise hata
         if ($response === 'none')
-            return $this->response(error: true, code: 404, message: 'Blog not found.', data: []);
+            return response()->json('Blog not found', 404);
 
         if (!$response)
-            return $this->response(error: true, code: 500, message: 'Blog not updated.', data: []);
+            return response()->json('Blog not updated', 500);
 
         // response json
-        return $this->response(message: 'Blog updated.', data: $response);
+        return response()->json($response);
     }
 
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         // delete data 
         $response = $this->blogRepository->delete($request);
 
         if ($response === 'none')
-            return $this->response(error: true, code: 404, message: 'Blog not found.', data: []);
+            return response()->json('Blog not found', 404);
 
         if (!$response)
-            return $this->response(error: true, code: 500, message: 'Blog not deleted.', data: []);
+            return response()->json('Blog not updated', 500);
 
         // response json
-        return $this->response(message: 'Blog deleted.', data: $response);
+        return response()->json('Blog deleted');
     }
 
-    public function detail(Request $request)
+    public function show(Request $request)
     {
         // delete data 
         $response = $this->blogRepository->get($request);
 
         if ($response === 'none')
-            return $this->response(error: true, code: 404, message: 'Blog not found.', data: []);
+            return response()->json('Blog not found', 404);
 
         // response json
-        return $this->response(message: 'Success.', data: $response);
+        return response()->json($response);
     }
 }

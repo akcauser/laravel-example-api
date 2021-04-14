@@ -10,4 +10,6 @@ class Blog extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $table = "blogs";
 }
