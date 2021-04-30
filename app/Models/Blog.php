@@ -12,4 +12,14 @@ class Blog extends Model
     use SoftDeletes;
 
     protected $table = "blogs";
+
+    protected $fillable = [
+        'title',
+        'body',
+    ];
+
+    public static $validationRules = [
+        'title' => 'required|string|max:255',
+        'body' => 'required|string',
+    ];
 }

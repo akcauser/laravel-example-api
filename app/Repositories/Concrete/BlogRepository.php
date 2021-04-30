@@ -18,10 +18,7 @@ class BlogRepository implements IBlogRepository
     public function store(Request $request)
     {
         // validation will be in for loop
-        $request->validate([
-            'title' => ['required', 'string', 'max:255',],
-            'body' => ['required', 'string'],
-        ]);
+        $request->validate(Blog::$validationRules);
 
         // save model
         $blog = new Blog();
@@ -45,10 +42,7 @@ class BlogRepository implements IBlogRepository
             return 'none';
 
         // validation will be in for loop
-        $request->validate([
-            'title' => ['required', 'string', 'max:255',],
-            'body' => ['required', 'string'],
-        ]);
+        $request->validate(Blog::$validationRules);
 
         // find and update blog
         $blog = Blog::find($request->id);
