@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('blogs')->group(function () {
     Route::get('', [\App\Http\Controllers\Api\ApiBlogController::class, 'index'])->name('blog.index');
     Route::post('', [\App\Http\Controllers\Api\ApiBlogController::class, 'store'])->name('blog.store');
-    Route::get('{id}', [\App\Http\Controllers\Api\ApiBlogController::class, 'show'])->name('blog.show');
+    Route::get('{id}', [\App\Http\Controllers\Api\ApiBlogController::class, 'get'])->name('blog.get');
     Route::put('{id}', [\App\Http\Controllers\Api\ApiBlogController::class, 'update'])->name('blog.update');
     Route::delete('{id}', [\App\Http\Controllers\Api\ApiBlogController::class, 'destroy'])->name('blog.destroy');
 });

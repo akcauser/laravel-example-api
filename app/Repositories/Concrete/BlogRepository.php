@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete;
 
+use App\Http\Requests\BlogStoreRequest;
+use App\Http\Requests\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Repositories\Abstract\IBlogRepository;
 use Illuminate\Http\Request;
@@ -15,68 +17,40 @@ class BlogRepository implements IBlogRepository
         return Blog::get();
     }
 
-    public function store(Request $request)
+    public function store(BlogStoreRequest $request)
     {
-        // validation will be in for loop
-        $request->validate(Blog::$validationRules);
+        $blog = new Blog([
+            "title" => $request->title,
+            "body" => $request->body
+        ]);
 
-        // save model
-        $blog = new Blog();
-        $blog->title = $request->title;
-        $blog->body = $request->body;
-
-        // save record, if can not save then return false
-        $res = $blog->save();
-        if (!$res) {
+        if (!$blog->save()) {
             return false;
         }
 
         return $blog;
     }
 
-    public function update(Request $request)
+    public function update(BlogUpdateRequest $request, Blog $blog)
     {
-        // find or fail
-        $blog = Blog::find($request->id);
-        if (!$blog)
-            return 'none';
-
-        // validation will be in for loop
-        $request->validate(Blog::$validationRules);
-
         // find and update blog
-        $blog = Blog::find($request->id);
         $blog->title = $request->title;
         $blog->body = $request->body;
 
-        // save record, if can not save then return false
-        $res = $blog->save();
-        if (!$res) {
+        if (!$blog->save()) {
             return false;
         }
 
         return $blog;
     }
 
-    public function delete(Request $request)
+    public function delete(Blog $blog)
     {
-        // find or fail
-        $blog = Blog::find($request->id);
-        if (!$blog)
-            return 'none';
-
-        // delete model
         return $blog->delete();
     }
 
-    public function get(Request $request)
+    public function get($id)
     {
-        // find or fail
-        $blog = Blog::find($request->id);
-        if (!$blog)
-            return 'none';
-
-        // find and update blog
-        return Blog::find($request->id);
+        return Blog::find($id);
     }
 }

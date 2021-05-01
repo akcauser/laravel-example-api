@@ -2,13 +2,17 @@
 
 namespace App\Repositories\Abstract;
 
+use App\Http\Requests\BlogStoreRequest;
+use App\Http\Requests\BlogUpdateRequest;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
-interface IBlogRepository {
+interface IBlogRepository
+{
 
     public function get_all();
-    public function store(Request $request);
-    public function update(Request $request);
-    public function delete(Request $request);
-    public function get(Request $request);
+    public function store(BlogStoreRequest $request);
+    public function update(BlogUpdateRequest $request, Blog $blog);
+    public function delete(Blog $blog);
+    public function get($id);
 }
