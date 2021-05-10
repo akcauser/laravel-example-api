@@ -6,7 +6,7 @@ use App\Models\Blog;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ApiBlogTest extends TestCase
+class APIBlogTest extends TestCase
 {
     use RefreshDatabase;
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CMS\CMSBlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('blogs')->group(function() {
-    Route::get('', [BlogController::class, 'list'])->name('blog.index');
-    Route::get('create', [BlogController::class, 'create_form'])->name('blog.create_form');
-    Route::get('update/{id}', [BlogController::class, 'update_form'])->name('blog.update_form');
-    Route::post('', [BlogController::class, 'create'])->name('blog.create');
-    Route::put('{id}', [BlogController::class, 'update'])->name('blog.update');
-    Route::delete('{id}', [BlogController::class, 'delete'])->name('blog.delete');
+Route::get('/cms', function () {
+    return view('home');
+});
+
+Route::prefix('blogs')->group(function () {
+    Route::get('', [CMSBlogController::class, 'index'])->name('cms.blogs.index');
+    Route::get('{id}', [CMSBlogController::class, 'show'])->name('cms.blogs.show');
+    Route::get('create', [CMSBlogController::class, 'create'])->name('cms.blogs.create');
+    Route::post('', [CMSBlogController::class, 'store'])->name('cms.blogs.store');
+    Route::get('{id}/edit', [CMSBlogController::class, 'edit'])->name('cms.blogs.edit');
+    Route::put('{id}', [CMSBlogController::class, 'update'])->name('cms.blogs.update');
+    Route::delete('{id}', [CMSBlogController::class, 'delete'])->name('cms.blogs.delete');
 });

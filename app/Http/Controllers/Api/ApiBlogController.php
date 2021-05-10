@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
+use App\Cruder\Service\Abstract\IBlogService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogStoreRequest;
 use App\Http\Requests\BlogUpdateRequest;
-use App\Repositories\Abstract\IBlogRepository;
-use Illuminate\Http\Request;
 
-class ApiBlogController extends Controller
+class APIBlogController extends Controller
 {
-    protected IBlogRepository $blogRepository;
+    protected IBlogService $blogService;
 
-    public function __construct(IBlogRepository $blogRepository)
+    public function __construct(IBlogService $blogService)
     {
-        $this->blogRepository = $blogRepository;
+        $this->blogService = $blogService;
     }
 
     /**
@@ -41,9 +40,19 @@ class ApiBlogController extends Controller
      */
     public function index()
     {
-        $blogs = $this->blogRepository->get_all();
+        $blogs = $this->blogService->get_all();
 
         return response()->json($blogs);
+    }
+
+
+    public function show($id)
+    {
+        $response = $this->blogService->get($id);
+        if ($response === 404)
+            return response()->json('Blog not found', 404);
+
+        return response()->json($response);
     }
 
     /**
@@ -78,51 +87,34 @@ class ApiBlogController extends Controller
      */
     public function store(BlogStoreRequest $request)
     {
-        // store data
-        $response = $this->blogRepository->store($request);
-
-        if (!$response)
+        $response = $this->blogService->store($request);
+        if ($response === 500)
             return response()->json('Blog not created', 500);
+        elseif ($response === 404)
+            return response()->json('Blog not found', 404);
 
-        // response json
         return response()->json($response);
     }
 
-    public function update(BlogUpdateRequest $request)
+    public function update(BlogUpdateRequest $request, $id)
     {
-        $blog = $this->blogRepository->get($request->id);
-        if (!$blog)
-            return response()->json('Blog not found', 404);
-
-        $response = $this->blogRepository->update($request, $blog);
-        if (!$response)
+        $response = $this->blogService->update($request, $id);
+        if ($response === 500)
             return response()->json('Blog not updated', 500);
+        elseif ($response === 404)
+            return response()->json('Blog not found', 404);
 
         return response()->json($response);
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        // delete data 
-
-        $blog = $this->blogRepository->get($request->id);
-        if (!$blog)
-            return response()->json('Blog not found', 404);
-
-        $response = $this->blogRepository->delete($blog);
-        if (!$response)
+        $response = $this->blogService->delete($id);
+        if ($response === 500)
             return response()->json('Blog not deleted', 500);
-
-        // response json
-        return response()->json('Blog deleted');
-    }
-
-    public function get(Request $request)
-    {
-        $blog = $this->blogRepository->get($request->id);
-        if (!$blog)
+        elseif ($response === 404)
             return response()->json('Blog not found', 404);
 
-        return response()->json($blog);
+        return response()->json('Blog deleted');
     }
 }
