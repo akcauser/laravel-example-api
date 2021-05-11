@@ -9,8 +9,28 @@ class BlogDataService implements IBlogDataService
 {
     public function get_all()
     {
-        return Blog::get();
+        return Blog::paginate(15);
     }
+
+    public function filter($search)
+    {
+        $query = Blog::query();
+        
+        if (isset($search)) {
+            $words = explode(' ', $search);
+            if (count($words) > 0) {
+                $query = $query->where(function ($sQuery) use ($words) {
+                    foreach ($words as $word) {
+                        $sQuery->orWhere('title', 'like', "%$word%");
+                        $sQuery->orWhere('body', 'like', "%$word%");
+                    }
+                });
+            }
+        }
+
+        return $query->paginate(15);
+    }
+
     /**
      * @param array $data 
      * @return mixed

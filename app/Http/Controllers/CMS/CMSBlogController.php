@@ -6,7 +6,6 @@ use App\Cruder\Service\Abstract\IBlogService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogStoreRequest;
 use App\Http\Requests\BlogUpdateRequest;
-use Illuminate\Http\Request;
 
 class CMSBlogController extends Controller
 {
@@ -20,38 +19,39 @@ class CMSBlogController extends Controller
     public function index()
     {
         $blogs = $this->blogService->get_all();
-
-        //todo: show blog list page
+        return view('cms.blogs.index', compact('blogs'));
     }
 
     public function show($id)
     {
-        $response = $this->blogService->get($id);
-        if ($response === 404)
+        $blog = $this->blogService->get($id);
+        if ($blog === 404)
             abort(404);
 
-        // todo: show blog detail page
+        return view('cms.blogs.show', compact('blog'));
     }
 
     public function create()
     {
-        //todo: show Create Form 
+        return view('cms.blogs.create');
     }
 
     public function store(BlogStoreRequest $request)
     {
-        // todo: store data
-
-        // todo: response list page or detail page
+        $response = $this->blogService->store($request);
+        if ($response === 500)
+            return back()->with('Success', 'Not created.');
+        
+        return back()->with('Success', 'Created');
     }
 
     public function edit($id)
     {
-        $response = $this->blogService->get($id);
-        if ($response === 404)
+        $blog = $this->blogService->get($id);
+        if ($blog === 404)
             abort(404);
 
-        // todo: update form open with blog data
+        return view('cms.blogs.edit', compact('blog'));
     }
 
     public function update(BlogUpdateRequest $request, $id)

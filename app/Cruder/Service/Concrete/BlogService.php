@@ -28,7 +28,11 @@ class BlogService implements IBlogService
 
     public function get_all()
     {
-        return $this->blogDataService->get_all();
+        if(request('search')){
+            return $this->blogDataService->filter(request('search'));    
+        }else{
+            return $this->blogDataService->get_all();
+        }
     }
 
     public function store(BlogStoreRequest $request)
