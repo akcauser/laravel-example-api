@@ -25,7 +25,7 @@ class APIBlogTest extends TestCase
         $response = $this->get('api/blogs');
 
         // assert response data count 
-        $response->assertJsonCount(5);
+        $response->assertJsonCount(5, 'data');
 
         // assert response code 200
         $response->assertStatus(200);

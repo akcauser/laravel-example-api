@@ -1,33 +1,28 @@
 <?php
 
-use App\Http\Controllers\CMS\CMSBlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| CMS Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
+| Here is where you can register cms routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('', function () {
     return view('cms.index');
 })->name('cms.index');
 
 Route::prefix('blogs')->group(function () {
-    Route::get('', [CMSBlogController::class, 'index'])->name('cms.blogs.index');
-    Route::get('create', [CMSBlogController::class, 'create'])->name('cms.blogs.create');
-    Route::get('{id}', [CMSBlogController::class, 'show'])->name('cms.blogs.show');
-    Route::post('', [CMSBlogController::class, 'store'])->name('cms.blogs.store');
-    Route::get('{id}/edit', [CMSBlogController::class, 'edit'])->name('cms.blogs.edit');
-    Route::put('{id}', [CMSBlogController::class, 'update'])->name('cms.blogs.update');
-    Route::delete('{id}', [CMSBlogController::class, 'delete'])->name('cms.blogs.destroy');
+    Route::get('', [App\Http\Controllers\CMS\CMSBlogController::class, 'index'])->name('cms.blogs.index');
+    Route::get('create', [App\Http\Controllers\CMS\CMSBlogController::class, 'create'])->name('cms.blogs.create');
+    Route::get('{id}', [App\Http\Controllers\CMS\CMSBlogController::class, 'show'])->name('cms.blogs.show');
+    Route::post('', [App\Http\Controllers\CMS\CMSBlogController::class, 'store'])->name('cms.blogs.store');
+    Route::get('{id}/edit', [App\Http\Controllers\CMS\CMSBlogController::class, 'edit'])->name('cms.blogs.edit');
+    Route::put('{id}', [App\Http\Controllers\CMS\CMSBlogController::class, 'update'])->name('cms.blogs.update');
+    Route::delete('{id}', [App\Http\Controllers\CMS\CMSBlogController::class, 'delete'])->name('cms.blogs.destroy');
 });

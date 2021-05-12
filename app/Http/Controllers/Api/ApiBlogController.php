@@ -16,28 +16,6 @@ class APIBlogController extends Controller
         $this->blogService = $blogService;
     }
 
-    /**
-     * @OA\Get(
-     *      path="/blogs",
-     *      operationId="getBlocksList",
-     *      tags={"Blogs"},
-     *      summary="Get list of blogs",
-     *      description="Returns list of blogs",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\Response(response="200", description="An example resource")
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     *     )
-     */
     public function index()
     {
         $blogs = $this->blogService->get_all();
@@ -55,36 +33,6 @@ class APIBlogController extends Controller
         return response()->json($response);
     }
 
-    /**
-     * @OA\Post(
-     *      path="/blogs",
-     *      operationId="storeBlogs",
-     *      tags={"Blogs"},
-     *      summary="Store new blog",
-     *      description="Store a blog and returns blog data",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/Blog")
-     *      ),
-     *      @OA\Response(
-     *          response=201,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Blog")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     * )
-     */
     public function store(BlogStoreRequest $request)
     {
         $response = $this->blogService->store($request);

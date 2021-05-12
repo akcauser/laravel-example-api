@@ -26,27 +26,7 @@ class Blog extends Model
         'body' => 'required|string',
     ];
 
-    /**
-     * The blog title
-     * @var string
-     *
-     * @OA\Property(
-     *   property="title",
-     *   type="string",
-     *   description="The blog title"
-     * )
-     */
     private $title;
 
-    /**
-     * The blog body
-     * @var string
-     *
-     * @OA\Property(
-     *   property="body",
-     *   type="string",
-     *   description="The blog body"
-     * )
-     */
     private $body;
 }
