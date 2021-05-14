@@ -1,36 +1,27 @@
-<table class="table table-responsive">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Body</th>
-            <th colspan="3">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach($blogs as $blog)
-        <tr>
-            <td>{{ $blog->title }}</td>
-            <td>{{ $blog->body }}</td>
-            <td>
-                <form action="{{ route('cms.blogs.destroy',$blog->id) }}" method="POST">
-                @csrf()
-                @method("DELETE")
-    
-                <div class='btn-group'>
-                    <a href="{{ route('cms.blogs.show', [$blog->id]) }}" class='btn btn-default btn-xs'>
-                        <i class="fas fa-eye"></i>
-                    </a>
-                    <a href="{{ route('cms.blogs.edit', [$blog->id]) }}" class='btn btn-default btn-xs'>
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <a type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                    
-                </div>
-                </form>
-            </td>
-        </tr>
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>title</th>
+        <th>body</th>
+        <th>created</th>
+        <th>actions</th>
+    </tr>
+    @foreach($blogs as $item)
+    <tr>
+        <td>{{$item->id}}</td>
+        <td>{{$item->title}}</td>
+        <td>
+            {{$item->body}}
+        </td>
+        <td>
+            {{$item->created_at}}
+            <b>({{ \Carbon\Carbon::parse($item->created_at)->diffForHumans() }})</b>
+        </td>
+        <td>
+            <a href="{{ route('cms.blogs.show', ['id' => $item->id]) }}" class="btn btn-secondary btn-sm">show</a>
+            <a href="{{ route('cms.blogs.edit', ['id' => $item->id]) }}" class="btn btn-success btn-sm">edit</a>
+            <a class="btn btn-danger btn-sm text-white" onclick="deleteItem({!! $item->id !!})">delete</a>
+        </td>
+    </tr>
     @endforeach
-    </tbody>
 </table>
