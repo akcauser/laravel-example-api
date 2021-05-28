@@ -1,0 +1,23 @@
+{
+    "modelName": "Blog",
+    "tableName": "blogs",
+    "options": {
+        "paginate": 15,
+        "softDelete": true,
+        "forceMigrate": true,
+        "timestamps": true,
+        "swagger": false
+    },
+    "fields": [
+        {
+            "name": "title",
+            "dbtype": "string",
+            "htmltype": "text",
+            "validations": "required|string|max:255",
+            "nullable": false,
+            "searchable": true,
+            "inIndex": false,
+            "fillable": true
+        }
+    ]
+}

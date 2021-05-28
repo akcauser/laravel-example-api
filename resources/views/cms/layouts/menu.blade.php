@@ -13,3 +13,10 @@
         <span>Blogs</span>
     </a>
 </li>
+
+<li class="nav-item dropdown">
+    <a href="{{route('cms.tags.index')}}" class="nav-link">
+        <i class="fas fa-square"></i>
+        <span>Tags</span>
+    </a>
+</li>

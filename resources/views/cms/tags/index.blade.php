@@ -7,7 +7,7 @@
 
 <script>
     var deleteItem = function (id) {
-        var url = "{{ route('cms.blogs.destroy', ':id') }}";
+        var url = "{{ route('cms.tags.destroy', ':id') }}";
         url = url.replace(':id', id);
 
         if (confirm("Do you want to delete really")) {
@@ -30,8 +30,8 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Blogs</h1>
-            <a class="btn btn-primary float-right ml-3" href="{{ route('cms.blogs.create') }}">New</a>
+            <h1>Tags</h1>
+            <a class="btn btn-primary float-right ml-3" href="{{ route('cms.tags.create') }}">New</a>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Components</a></div>
@@ -50,7 +50,7 @@
                                     <div class="input-group">
                                         @if(request('search'))
                                         <div class="text-danger mr-1">
-                                            <a class="btn btn-sm btn-danger" href="{{route('cms.blogs.index')}}">
+                                            <a class="btn btn-sm btn-danger" href="{{route('cms.tags.index')}}">
                                                 <i class="fas fa-times-circle"></i>
                                             </a>
                                         </div>
@@ -68,18 +68,18 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
-                                        @include('cms.blogs.table_th')
+                                        @include('cms.tags.table_th')
                                     </tr>
-                                    @foreach($blogs as $item)
+                                    @foreach($tags as $item)
                                     <tr>
-                                        @include('cms.blogs.table_td')
+                                        @include('cms.tags.table_td')
                                     </tr>   
                                     @endforeach
                                 </table>
                             </div>
                         </div>
                         <div class="card-footer">
-                            {{ $blogs->links('cms.layouts.pagination') }}
+                            {{ $tags->links('cms.layouts.pagination') }}
                         </div>
                     </div>
                 </div>

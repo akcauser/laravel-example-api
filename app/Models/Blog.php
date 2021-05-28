@@ -29,4 +29,14 @@ class Blog extends Model
     private $title;
 
     private $body;
+
+    public function tags()
+    {
+        return $this->hasMany(Tag::class, 'blog_id', 'id');
+    }
+
+
+    protected $with = [
+        "tags",
+    ];
 }

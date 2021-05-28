@@ -26,3 +26,13 @@ Route::prefix('blogs')->group(function () {
     Route::put('{id}', [App\Http\Controllers\CMS\CMSBlogController::class, 'update'])->name('cms.blogs.update');
     Route::delete('{id}', [App\Http\Controllers\CMS\CMSBlogController::class, 'delete'])->name('cms.blogs.destroy');
 });
+
+Route::prefix('tags')->group(function () {
+    Route::get('', [App\Http\Controllers\CMS\CMSTagController::class, 'index'])->name('cms.tags.index');
+    Route::get('create', [App\Http\Controllers\CMS\CMSTagController::class, 'create'])->name('cms.tags.create');
+    Route::get('{id}', [App\Http\Controllers\CMS\CMSTagController::class, 'show'])->name('cms.tags.show');
+    Route::post('', [App\Http\Controllers\CMS\CMSTagController::class, 'store'])->name('cms.tags.store');
+    Route::get('{id}/edit', [App\Http\Controllers\CMS\CMSTagController::class, 'edit'])->name('cms.tags.edit');
+    Route::put('{id}', [App\Http\Controllers\CMS\CMSTagController::class, 'update'])->name('cms.tags.update');
+    Route::delete('{id}', [App\Http\Controllers\CMS\CMSTagController::class, 'delete'])->name('cms.tags.destroy');
+});

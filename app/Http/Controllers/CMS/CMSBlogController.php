@@ -41,7 +41,7 @@ class CMSBlogController extends Controller
         $response = $this->blogService->store($request);
         if ($response === 500)
             return back()->with('Success', 'Not created.');
-        
+
         return back()->with('Success', 'Created');
     }
 
@@ -72,7 +72,5 @@ class CMSBlogController extends Controller
             return back()->with('Success', 'Not deleted.');
         elseif ($response === 404)
             abort(404);
-
-        // todo: list page open
     }
 }

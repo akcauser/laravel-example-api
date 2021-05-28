@@ -25,3 +25,11 @@ Route::prefix('blogs')->group(function () {
     Route::put('{id}', [\App\Http\Controllers\API\APIBlogController::class, 'update'])->name('api.blogs.update');
     Route::delete('{id}', [\App\Http\Controllers\API\APIBlogController::class, 'destroy'])->name('api.blogs.destroy');
 });
+
+Route::prefix('tags')->group(function () {
+    Route::get('', [\App\Http\Controllers\API\APITagController::class, 'index'])->name('api.tags.index');
+    Route::post('', [\App\Http\Controllers\API\APITagController::class, 'store'])->name('api.tags.store');
+    Route::get('{id}', [\App\Http\Controllers\API\APITagController::class, 'show'])->name('api.tags.show');
+    Route::put('{id}', [\App\Http\Controllers\API\APITagController::class, 'update'])->name('api.tags.update');
+    Route::delete('{id}', [\App\Http\Controllers\API\APITagController::class, 'destroy'])->name('api.tags.destroy');
+});
