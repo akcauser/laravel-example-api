@@ -20,9 +20,9 @@
                 "tags": [
                     "Blogs"
                 ],
-                "summary": "Get list of blogs",
-                "description": "Returns list of blogs",
-                "operationId": "getBlocksList",
+                "summary": "List blogs",
+                "description": "List blogs",
+                "operationId": "v1ListBlog",
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -39,9 +39,9 @@
                 "tags": [
                     "Blogs"
                 ],
-                "summary": "Store new blog",
-                "description": "Store a blog and returns blog data",
-                "operationId": "storeBlogs",
+                "summary": "Store a blog",
+                "description": "Store a blog",
+                "operationId": "v1StoreBlog",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -53,18 +53,110 @@
                     }
                 },
                 "responses": {
-                    "201": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Blog"
-                                }
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/blogs/{id}": {
+            "get": {
+                "tags": [
+                    "Blogs"
+                ],
+                "summary": "Show a blog",
+                "description": "Show a blog",
+                "operationId": "v1ShowBlog",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Blog id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Blogs"
+                ],
+                "summary": "Update a blog",
+                "description": "Update a blog",
+                "operationId": "v1UpdateBlog",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Blog id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Blog"
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
                     },
-                    "400": {
-                        "description": "Bad Request"
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Blogs"
+                ],
+                "summary": "Delete a blog",
+                "description": "Delete a blog",
+                "operationId": "v1DeleteBlog",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Blog id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
                     },
                     "401": {
                         "description": "Unauthenticated"
@@ -81,11 +173,11 @@
             "Blog": {
                 "properties": {
                     "title": {
-                        "description": "The blog title",
+                        "description": "Blog title",
                         "type": "string"
                     },
                     "body": {
-                        "description": "The blog body",
+                        "description": "Blog body",
                         "type": "string"
                     }
                 },

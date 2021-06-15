@@ -72,4 +72,14 @@ class TagService implements ITagService
 
         return $response;
     }
+
+    public function get_all_by_blog($blogId)
+    {
+        $response = $this->tagDataService->get_all_by_blog($blogId);
+        if (!$response) {
+            return 500;
+        }
+
+        return $response;
+    }
 }

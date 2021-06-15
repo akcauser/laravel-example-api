@@ -8,7 +8,7 @@
     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Blog</label>
     <div class="col-sm-12 col-md-7">
         <select class="form-control" name="blog_id">
-            @foreach($blogs as $blog)
+            @foreach(\App\Models\Blog::get() as $blog)
                 <option {{ isset($tag) && $blog->id == $tag->blog_id ? "selected" : "" }} value="{{ $blog->id }}">{{ $blog->title }}</option>
             @endforeach
         </select>

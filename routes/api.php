@@ -33,3 +33,6 @@ Route::prefix('tags')->group(function () {
     Route::put('{id}', [\App\Http\Controllers\API\APITagController::class, 'update'])->name('api.tags.update');
     Route::delete('{id}', [\App\Http\Controllers\API\APITagController::class, 'destroy'])->name('api.tags.destroy');
 });
+Route::prefix('blogs')->group(function () {
+    Route::get('{blogId}/tags', [\App\Http\Controllers\API\APITagController::class, 'blog_tags'])->name('api.blog_tags.show');
+});

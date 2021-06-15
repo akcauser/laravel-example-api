@@ -26,17 +26,36 @@ class Blog extends Model
         'body' => 'required|string',
     ];
 
-    private $title;
-
-    private $body;
-
     public function tags()
     {
         return $this->hasMany(Tag::class, 'blog_id', 'id');
     }
 
-
     protected $with = [
         "tags",
     ];
+
+    /**
+     * Blog title
+     * @var string
+     *
+     * @OA\Property(
+     * property="title",
+     * type="string",
+     * description="Blog title"
+     * )
+     */
+    private $title;
+
+    /**
+     * Blog body
+     * @var string
+     *
+     * @OA\Property(
+     * property="body",
+     * type="string",
+     * description="Blog body"
+     * )
+     */
+    private $body;
 }

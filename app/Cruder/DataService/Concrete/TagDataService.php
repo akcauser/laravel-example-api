@@ -77,4 +77,9 @@ class TagDataService implements ITagDataService
     {
         return Tag::find($id);
     }
+
+    public function get_all_by_blog($blogId)
+    {
+        return Tag::where('blog_id', $blogId)->get();
+    }
 }

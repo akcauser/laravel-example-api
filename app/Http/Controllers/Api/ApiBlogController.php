@@ -16,6 +16,28 @@ class APIBlogController extends Controller
         $this->blogService = $blogService;
     }
 
+    /**
+     * @OA\GET(
+     * path="/blogs",
+     * operationId="v1ListBlog",
+     * tags={"Blogs"},
+     * summary="List blogs",
+     * description="List blogs",
+     * @OA\Response(
+     * response=200,
+     * description="Successful operation",
+     * @OA\Response(response="200", description="An example resource")
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Unauthenticated",
+     * ),
+     * @OA\Response(
+     * response=403,
+     * description="Forbidden"
+     * )
+     * )
+     */
     public function index()
     {
         $blogs = $this->blogService->get_all();
@@ -23,7 +45,37 @@ class APIBlogController extends Controller
         return response()->json($blogs);
     }
 
-
+    /**
+     * @OA\GET(
+     * path="/blogs/{id}",
+     * operationId="v1ShowBlog",
+     * tags={"Blogs"},
+     * summary="Show a blog",
+     * description="Show a blog",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Blog id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * @OA\Response(
+     * response=200,
+     * description="Successful operation",
+     * @OA\Response(response="200", description="An example resource")
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Unauthenticated",
+     * ),
+     * @OA\Response(
+     * response=403,
+     * description="Forbidden"
+     * )
+     * )
+     */
     public function show($id)
     {
         $response = $this->blogService->get($id);
@@ -33,6 +85,32 @@ class APIBlogController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * @OA\POST(
+     * path="/blogs",
+     * operationId="v1StoreBlog",
+     * tags={"Blogs"},
+     * summary="Store a blog",
+     * description="Store a blog",
+     * @OA\RequestBody(
+     * required=true,
+     * @OA\JsonContent(ref="#/components/schemas/Blog")
+     * ),
+     * @OA\Response(
+     * response=200,
+     * description="Successful operation",
+     * @OA\Response(response="200", description="An example resource")
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Unauthenticated",
+     * ),
+     * @OA\Response(
+     * response=403,
+     * description="Forbidden"
+     * )
+     * )
+     */
     public function store(BlogStoreRequest $request)
     {
         $response = $this->blogService->store($request);
@@ -44,6 +122,41 @@ class APIBlogController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * @OA\PUT(
+     * path="/blogs/{id}",
+     * operationId="v1UpdateBlog",
+     * tags={"Blogs"},
+     * summary="Update a blog",
+     * description="Update a blog",
+     * @OA\RequestBody(
+     * required=true,
+     * @OA\JsonContent(ref="#/components/schemas/Blog")
+     * ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Blog id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * @OA\Response(
+     * response=200,
+     * description="Successful operation",
+     * @OA\Response(response="200", description="An example resource")
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Unauthenticated",
+     * ),
+     * @OA\Response(
+     * response=403,
+     * description="Forbidden"
+     * )
+     * )
+     */
     public function update(BlogUpdateRequest $request, $id)
     {
         $response = $this->blogService->update($request, $id);
@@ -55,6 +168,37 @@ class APIBlogController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * @OA\DELETE(
+     * path="/blogs/{id}",
+     * operationId="v1DeleteBlog",
+     * tags={"Blogs"},
+     * summary="Delete a blog",
+     * description="Delete a blog",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Blog id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * @OA\Response(
+     * response=200,
+     * description="Successful operation",
+     * @OA\Response(response="200", description="An example resource")
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Unauthenticated",
+     * ),
+     * @OA\Response(
+     * response=403,
+     * description="Forbidden"
+     * )
+     * )
+     */
     public function destroy($id)
     {
         $response = $this->blogService->delete($id);

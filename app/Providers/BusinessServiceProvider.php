@@ -15,7 +15,8 @@ class BusinessServiceProvider extends ServiceProvider
     {
         //DON'T DELETE THIS LINES
         #business-service-injection
-        $this->app->singleton(\App\Cruder\Service\Abstract\IBlogService::class, \App\Cruder\Service\Concrete\BlogService::class);
         $this->app->singleton(\App\Cruder\Service\Abstract\ITagService::class, \App\Cruder\Service\Concrete\TagService::class);
+
+        $this->app->singleton(\App\Cruder\Service\Abstract\IBlogService::class, \App\Cruder\Service\Concrete\BlogService::class);
     }
 }

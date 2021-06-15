@@ -23,7 +23,6 @@ class APITagController extends Controller
         return response()->json($tags);
     }
 
-
     public function show($id)
     {
         $response = $this->tagService->get($id);
@@ -64,5 +63,12 @@ class APITagController extends Controller
             return response()->json('Tag not found', 404);
 
         return response()->json('Tag deleted');
+    }
+
+    public function blog_tags($blogId)
+    {
+        $tags = $this->tagService->get_all_by_blog($blogId);
+
+        return response()->json($tags);
     }
 }

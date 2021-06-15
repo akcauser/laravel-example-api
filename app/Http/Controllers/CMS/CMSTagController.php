@@ -36,9 +36,7 @@ class CMSTagController extends Controller
 
     public function create()
     {
-        $blogs = $this->blogService->get_all();
-
-        return view('cms.tags.create', compact('blogs'));
+        return view('cms.tags.create');
     }
 
     public function store(TagStoreRequest $request)
@@ -56,9 +54,7 @@ class CMSTagController extends Controller
         if ($tag === 404)
             abort(404);
 
-        $blogs = $this->blogService->get_all();
-
-        return view('cms.tags.edit', compact('tag', 'blogs'));
+        return view('cms.tags.edit', compact('tag'));
     }
 
     public function update(TagUpdateRequest $request, $id)

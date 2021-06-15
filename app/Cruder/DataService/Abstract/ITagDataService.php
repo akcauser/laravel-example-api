@@ -12,4 +12,5 @@ interface ITagDataService
     public function update(Tag $tag, $data);
     public function delete(Tag $tag);
     public function get($id);
+    public function get_all_by_blog($blogId);
 }

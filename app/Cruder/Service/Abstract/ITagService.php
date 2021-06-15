@@ -10,4 +10,5 @@ interface ITagService
     public function update($request, $id);
     public function delete($id);
     public function get($id);
+    public function get_all_by_blog($blogId);
 }
