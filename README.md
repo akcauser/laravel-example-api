@@ -27,6 +27,6 @@ Run this commands.
 
 Theme: Stisla - https://getstisla.com/
 
-## LICENSE 
+## LICENSE 
 
 MIT LICENSE @2021 
